@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Kunvo Image Downloader",
+  "short_name": "Kunvo Img",
+  "version": "1.0.0",
+  "description": "Smart image extractor — filter & batch download images from any webpage. 智能提取网页图片，筛选并批量下载。",
+  "author": "kunvo",
+  "homepage_url": "https://github.com/kunvo/kunvo-image-downloader",
+  "permissions": ["activeTab", "downloads", "sidePanel"],
+  "action": {
+    "default_title": "Kunvo Image Downloader"
+  },
+  "side_panel": {
+    "default_path": "popup/popup.html"
+  },
+  "background": {
+    "service_worker": "background/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content/content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

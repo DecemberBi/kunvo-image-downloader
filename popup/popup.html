@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+<div id="app">
+  <!-- 顶部工具栏 -->
+  <header id="toolbar">
+    <div id="toolbar-left">
+      <button id="btn-settings" class="btn-icon" title="下载设置">&#9881;</button>
+      <button id="btn-refresh" class="btn-icon" title="刷新图片">&#8635;</button>
+      <h1 id="title">Kunvo Image Downloader</h1>
+    </div>
+    <div id="actions">
+      <button id="btn-select-all" class="btn">全选</button>
+      <button id="btn-download" class="btn btn-primary" disabled>
+        <span id="download-icon">&#8595;</span> 下载
+      </button>
+    </div>
+  </header>
+
+  <!-- 筛选栏 -->
+  <div id="filter-bar">
+    <label for="size-filter">最小尺寸</label>
+    <select id="size-filter">
+      <option value="0">不限</option>
+      <option value="100">≥ 100×100</option>
+      <option value="200" selected>≥ 200×200</option>
+      <option value="400">≥ 400×400</option>
+      <option value="800">≥ 800×800</option>
+      <option value="1200">≥ 1200×1200</option>
+    </select>
+    <label for="dedup-filter">去重</label>
+    <select id="dedup-filter">
+      <option value="off">不筛选</option>
+      <option value="0">完全相同</option>
+      <option value="2">严格 (≤2)</option>
+      <option value="4" selected>默认 (≤4)</option>
+      <option value="8">宽松 (≤8)</option>
+      <option value="16">很宽松 (≤16)</option>
+    </select>
+  </div>
+
+  <!-- 下载设置面板（可折叠） -->
+  <div id="settings-panel" class="collapsed">
+    <div class="setting-row">
+      <label for="subfolder">保存目录</label>
+      <input type="text" id="subfolder" placeholder="默认下载目录" spellcheck="false">
+      <span class="hint">留空使用浏览器默认目录</span>
+    </div>
+    <div class="setting-row">
+      <label for="naming-rule">文件命名</label>
+      <select id="naming-rule">
+        <option value="original">原始文件名</option>
+        <option value="prefix">自定义前缀 + 序号</option>
+        <option value="pagetitle">页面标题 + 序号</option>
+        <option value="date">日期 + 序号</option>
+      </select>
+    </div>
+    <div class="setting-row" id="prefix-row" style="display:none">
+      <label for="prefix-input">前缀</label>
+      <input type="text" id="prefix-input" placeholder="image" spellcheck="false">
+    </div>
+  </div>
+
+  <!-- 选中计数 -->
+  <div id="counter">
+    <span id="counter-text">正在分析页面...</span>
+  </div>
+
+  <!-- 图片网格 -->
+  <main id="grid"></main>
+
+  <!-- 空状态 -->
+  <div id="empty-state" class="hidden">
+    <div id="empty-icon">&#128444;</div>
+    <p>当前页面没有找到主要图片</p>
+  </div>
+</div>
+
+<script src="popup.js"></script>
+</body>
+</html>
